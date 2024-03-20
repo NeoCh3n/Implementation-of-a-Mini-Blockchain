@@ -1,0 +1,2 @@
+cryptography==42.0.5
+merkletools==1.0.3
