@@ -26,29 +26,14 @@ Task3:
 Construction of blockchain
 
 Function defined :
-create_account(): This function will create a new blockchain account, which likely involves generating a public-private key pair that can be used for secure transactions.
+`create_account()` will create a new blockchain account, and generate a public-private key pair.
 
-run_blockchain(): This function will handle the process of recording a transaction on the blockchain. It will validate the transaction, creating a transaction record, and broadcasting the transaction to the network.
+`run_blockchain()` will recorde transaction. It will verify the transaction, create transaction record, and broadcast transaction to net.
 
-create_merkle_tree(): The function will construct a Merkle tree. Merkle trees are used in blockchains to efficiently and securely verify the contents of large data structures like transaction records.
-
-The transaction is stored in a block within a Merkle Tree using the `create_merkle_tree()` function. The Merkle Tree helps to ensure the integrity of the transaction data within the block and across the blockchain.
+`create_merkle_tree()` will construct a Merkle tree to verify the contents of data structures. Transaction will be stored in block and it will ensure the integrity of the transaction data.
 
 Task4:
-Integrity verification of transactions and blockchains
+Integrity verification
 
 Function defined:
-`simulate_tampering(blockchain)`: This function takes a `Blockchain` object as an argument and simulates tampering by altering a transaction in the last block of the blockchain. It then recalculates the Merkle root and block hash to determine if tampering can be detected.
-
- Simulation process:
-
- - The script first creates a `Blockchain` instance and adds two blocks with sample transactions.
- - The `simulate_tampering` function is then called to demonstrate the effect of tampering with the block data on the blockchain.
-  - Modify the transactions in the last block.
-  - Recalculate the Merkel root of the tampered block.
-  - Recalculate the hashes of the tampered blocks.
-  - The recalculated hash is checked to see if it matches the original hash of the block.
- - If the recalculated hash does not match the original hash, the script prints a message stating that the block has been tampered with.
-
-
-
+`simulate_tampering(blockchain)` will simulate tampering and recalculate the Merkle root and hash, to find if there is a tampering.
