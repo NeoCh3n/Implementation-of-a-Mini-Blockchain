@@ -1,4 +1,4 @@
-# Implementation-of-a-Mini-Blockchain
+.# Implementation-of-a-Mini-Blockchain
 
 Group member:
 23408405 CHEN Bowen
@@ -37,6 +37,18 @@ The transaction is stored in a block within a Merkle Tree using the `create_merk
 Task4:
 Integrity verification of transactions and blockchains
 
+Function defined:
+`simulate_tampering(blockchain)`: This function takes a `Blockchain` object as an argument and simulates tampering by altering a transaction in the last block of the blockchain. It then recalculates the Merkle root and block hash to determine if tampering can be detected.
+
+ Simulation process:
+
+ - The script first creates a `Blockchain` instance and adds two blocks with sample transactions.
+ - The `simulate_tampering` function is then called to demonstrate the effect of tampering with the block data on the blockchain.
+  - Modify the transactions in the last block.
+  - Recalculate the Merkel root of the tampered block.
+  - Recalculate the hashes of the tampered blocks.
+  - The recalculated hash is checked to see if it matches the original hash of the block.
+ - If the recalculated hash does not match the original hash, the script prints a message stating that the block has been tampered with.
 
 
 
