@@ -1,4 +1,4 @@
-# Implementation-of-a-Mini-Blockchain
+.# Implementation-of-a-Mini-Blockchain
 
 Group member:
 23408405 CHEN Bowen
@@ -21,3 +21,19 @@ create public keys and private keys for Alice and Bob
 Stimulate a transaction of 100 coins from Alice to Bob
 
 Store the transaction in a block of Merkle Tree()
+
+Task3:
+Construction of blockchain
+
+Function defined :
+`create_account()` will create a new blockchain account, and generate a public-private key pair.
+
+`run_blockchain()` will recorde transaction. It will verify the transaction, create transaction record, and broadcast transaction to net.
+
+`create_merkle_tree()` will construct a Merkle tree to verify the contents of data structures. Transaction will be stored in block and it will ensure the integrity of the transaction data.
+
+Task4:
+Integrity verification
+
+Function defined:
+`simulate_tampering(blockchain)` will simulate tampering and recalculate the Merkle root and hash, to find if there is a tampering.
