@@ -7,6 +7,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 
+
 # Reuse functions from previously reviewed files for account creation and Merkle tree construction
 def create_account():
     private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
@@ -42,7 +43,17 @@ class Block:
     def calculate_hash(self):
         block_header = str(self.timestamp) + self.previous_hash + self.merkle_root
         return calculate_hash(block_header)
-
+class Block:
+    def __init__(self, transactions, previous_hash=''):
+        self.timestamp = time.time()
+        self.transactions = transactions
+        self.previous_hash = previous_hash
+        self.merkle_root = calculate_merkle_root(transactions)
+        self.hash = self.calculate_hash()
+    
+    def calculate_hash(self):
+        block_string = str(self.timestamp) + self.previous_hash + self.merkle_root + ''.join(self.transactions)
+        return calculate_hash(block_string)
 class Blockchain:
     def __init__(self):
         self.chain = [self.create_genesis_block()]

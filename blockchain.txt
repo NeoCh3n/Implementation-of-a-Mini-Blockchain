@@ -1,0 +1,15 @@
+Previous Hash: 0
+Transactions: [b'Genesis Transaction']
+Merkle Root: 47656e65736973205472616e73616374696f6e
+Block Hash: 9ea94bf003eaae447616580dba0e5edc4ff602294f3e3829bc9da6f4b2f507b4
+
+Previous Hash: 9ea94bf003eaae447616580dba0e5edc4ff602294f3e3829bc9da6f4b2f507b4
+Transactions: [b'Transaction 1', b'Transaction 2']
+Merkle Root: 39704f929d837dc8bd8e86c70c4fb06cf740e7294f1036d030e92fe545f18275
+Block Hash: 728905316d8d2febb14bf156f9933a320470495a8665c0881403840319cbc182
+
+Previous Hash: 728905316d8d2febb14bf156f9933a320470495a8665c0881403840319cbc182
+Transactions: [b'Transaction 3', b'Transaction 4']
+Merkle Root: 64833afa7026409be938e6e21a643749233e5d418b906fe5b6f304e7a7636eef
+Block Hash: 952ccc9a37551cbaf078476a31326b838f996acceaf4c3e0b5dcc937efb42f48
+
