@@ -1,41 +1,44 @@
-import hashlib
+import hashlib 
 
-# build Merkle tree
-def build_tree(data):
-    tree = []
-    # Save the hash values of all data blocks to leaf nodes
-    for d in data:
-        print('ddd', d)
-        tree.append(hashlib.sha256(d.encode()).hexdigest())
+transaction_list = []
+class trasanctions:
+        def __init__(self, amount_of_coins,digital_signature,sender_address,receiver_address):
+            self.amount_of_coins = amount_of_coins
+            self.digital_signature = digital_signature
+            self.sender_address = sender_address
+            self.receiver_address = receiver_address
+            self.transaction_contents = f"{amount_of_coins}|{digital_signature}|{sender_address}|{receiver_address}"
 
-    # create Father node
-    while len(tree) > 1:
-        parent_level = []
-        for i in range(0, len(tree), 2):
-            # if current node only have one child node, copy it as another child node
-            if i == len(tree) - 1:
-                parent_level.append(tree[i] + tree[i])
+transaction_data1 = trasanctions('100',hashlib.sha3_256(str(100).encode()).hexdigest(),'SenderAddress1','ReceiverAddress1')
+transaction_data2 = trasanctions('50',hashlib.sha3_256(str(50).encode()).hexdigest(),'SenderAddress2','ReceiverAddress2')
+transaction_data3 = trasanctions('150',hashlib.sha3_256(str(50).encode()).hexdigest(),'SenderAddress3','ReceiverAddress3')
+transaction_data4 = trasanctions('50',hashlib.sha3_256(str(50).encode()).hexdigest(),'SenderAddress4','ReceiverAddress4')
+
+transaction_list = [transaction_data1.transaction_contents, transaction_data2.transaction_contents, transaction_data3.transaction_contents, transaction_data4.transaction_contents]
+ 
+for tx in transaction_list:
+    print('tx: ', tx)
+
+def build_merkle_tree(leaves):
+    tree = [list(map(lambda x: hashlib.sha256(x.encode()).hexdigest(), leaves))]
+    while len(tree[-1]) > 1:
+        level = []
+        for i in range(0, len(tree[-1]), 2):
+            if i + 1 == len(tree[-1]):
+                level.append(tree[-1][i])
             else:
-                parent_level.append(tree[i] + tree[i+1])
-        # add current father node to the tree
-        tree = parent_level
-        print('tree', tree)
-    return tree[0]
+                level.append(hashlib.sha256((tree[-1][i] + tree[-1][i + 1]).encode()).hexdigest())
+        tree.append(level)
+    return tree
 
-# Verify data integrity
-def validate(hash, data):
-    # if current node is child node, compare it with hash value of data block
-    if len(hash) == 64:
-        return hash == hashlib.sha256(data.encode()).hexdigest()
-    # if current node is father node, recursive validation of child nodes
-    left = hash[0:64]
-    right = hash[64:]
-    return validate(left, data) or validate(right, data)
+def verify_data_integrity(data, root_hash):
+    tree = build_merkle_tree(data)
+    return root_hash == tree[-1][0]
+ 
+# transactions data
+tree = build_merkle_tree(transaction_list)
+print("Merkle Tree:", tree)
 
-# test
-data = ["Tx1", "Tx2", "Tx3", "Tx4"]
-root = build_tree(data)
-
-print("Merkle Root: ", root)
-print("data integrity：",validate(root, "Tx4"))
-print("data integrity：",validate(root, "Tx7"))
+root_hash = tree[-1][0]
+print("Root Hash:", root_hash)
+print("Data is Valid:", verify_data_integrity(transaction_list, root_hash))
